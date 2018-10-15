@@ -28,8 +28,10 @@ public class SortingAlgorithmApplicationTests {
 	@Before
 	public void first(){
 		ints = new int[10];
+		Random random = new Random();
 		for (int i = 0; i < 10; i++) {
-			ints[i] = Long.valueOf(Math.round(Math.random()*(100-0)+0)).intValue();
+//			ints[i] = Long.valueOf(Math.round(Math.random()*(100-0)+0)).intValue();
+			ints[i] = random.nextInt(100)%(100-0+1) + 0;
 		}
 	}
 
