@@ -25,20 +25,24 @@ public class SortingAlgorithmApplicationTests {
 	ServiceSorting serviceSorting;
 
 	private int[] ints;
+	private Gson gson = new Gson();
+
 	@Before
 	public void first(){
-		ints = new int[10];
+		int number = 10;
+		ints = new int[number];
 		Random random = new Random();
-		for (int i = 0; i < 10; i++) {
-//			ints[i] = Long.valueOf(Math.round(Math.random()*(100-0)+0)).intValue();
-			ints[i] = random.nextInt(100)%(100-0+1) + 0;
+		for (int i = 0; i < number; i++) {
+//			ints[i] = 99 + (int)(Math.random()*(100+1-99));
+			ints[i] = random.nextInt(100-0+1) + 0;
+//			ints[i] = (int)((Math.random()*9+1)*100000);
 		}
 	}
 
 	@Test
 	public void contextLoads()throws Exception {
-		Gson gson = new Gson();
 		System.out.println(gson.toJson(ints));
+		//冒泡
 		serviceSorting.bubblesort(ints);
 		System.out.println(gson.toJson(ints));
 	}
