@@ -19,14 +19,13 @@ public class ServiceSortingImpl implements ServiceSorting {
     继续重复上述过程，依次将第2.3...n-1个最小数排好位置。*/
     @Override
     public void bubblesort(int[] ints) throws Exception {
-        int[] arr = ints;
-        int temp;//临时变量
-        for (int i = 0; i < arr.length - 1; i++) {   //表示趟数，一共arr.length-1次。
-            for (int j = arr.length - 1; j > i; j--) {
-                if (arr[j] < arr[j - 1]) {
-                    temp = arr[j];
-                    arr[j] = arr[j - 1];
-                    arr[j - 1] = temp;
+        int temp;
+        for (int i = 0; i < ints.length - 1; i++) {
+            for (int j = ints.length - 1; j > i ; j--) {
+                if(ints[j] < ints[j - 1]){
+                    temp = ints[j];
+                    ints[j] = ints[j - 1];
+                    ints[j-1] = temp;
                 }
             }
         }

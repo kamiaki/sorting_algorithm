@@ -24,18 +24,18 @@ public class SortingAlgorithmApplicationTests {
 	@Qualifier(value = "sort")
 	ServiceSorting serviceSorting;
 
+	private int number = 10;
+	private int min = 0;
+	private int max = 10;
 	private int[] ints;
 	private Gson gson = new Gson();
+	private Random random = new Random();
 
 	@Before
 	public void first(){
-		int number = 10;
 		ints = new int[number];
-		Random random = new Random();
 		for (int i = 0; i < number; i++) {
-//			ints[i] = 99 + (int)(Math.random()*(100+1-99));
-			ints[i] = random.nextInt(100-0+1) + 0;
-//			ints[i] = (int)((Math.random()*9+1)*100000);
+			ints[i] = min+(int)(Math.random()*(max+1-min));
 		}
 	}
 
