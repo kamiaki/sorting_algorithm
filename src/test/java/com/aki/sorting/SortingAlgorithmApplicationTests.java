@@ -42,8 +42,11 @@ public class SortingAlgorithmApplicationTests {
 	@Test
 	public void contextLoads()throws Exception {
 		System.out.println(gson.toJson(ints));
-		//冒泡
-		serviceSorting.bubblesort(ints);
+//		//冒泡
+//		serviceSorting.bubblesort(ints);
+//		System.out.println(gson.toJson(ints));
+		//选择
+		serviceSorting.selectsort(ints);
 		System.out.println(gson.toJson(ints));
 	}
 

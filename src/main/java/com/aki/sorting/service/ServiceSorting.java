@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface ServiceSorting {
     void bubblesort(int[] ints)throws Exception;
+    void selectsort(int[] array)throws Exception;
 }
