@@ -45,8 +45,11 @@ public class SortingAlgorithmApplicationTests {
 //		//冒泡
 //		serviceSorting.bubblesort(ints);
 //		System.out.println(gson.toJson(ints));
-		//选择
-		serviceSorting.selectsort(ints);
+//		//选择
+//		serviceSorting.selectsort(ints);
+//		System.out.println(gson.toJson(ints));
+		//插入
+		serviceSorting.insertionsort(ints);
 		System.out.println(gson.toJson(ints));
 	}
 
