@@ -82,4 +82,38 @@ public class ServiceSortingImpl implements ServiceSorting {
             }
         }
     }
+
+    /*  前言：
+      数据序列1： 13-17-20-42-28 利用插入排序，13-17-20-28-42. Number of swap:1;
+      数据序列2： 13-17-20-42-14 利用插入排序，13-14-17-20-42. Number of swap:3;
+      如果数据序列基本有序，使用插入排序会更加高效。
+      基本思想：
+      在要排序的一组数中，根据某一增量分为若干子序列，并对子序列分别进行插入排序。
+      然后逐渐将增量减小,并重复上述过程。直至增量为1,此时数据序列基本有序,最后进行插入排序。*/
+    @Override
+    public void shellsort(int[] array) throws Exception {
+       int temp = 0;
+       int length = array.length;
+       int incre = length;
+
+       while (true){
+           incre = incre/2;     //分成了多少组
+           for (int k = 0; k < incre; k++) {    //循环排序多少组
+               for (int i = k; i < length - incre; i += incre) {  //插排
+                   for (int j = i  + incre ; j > k; j -= incre) {
+                       if(array[j] < array[j - incre]){
+                           temp = array[j - incre];
+                           array[j - incre] = array[j];
+                           array[j] = temp;
+                       }else {
+                           break;
+                       }
+                   }
+               }
+           }
+           if(incre == 1){
+               break;
+           }
+       }
+    }
 }
