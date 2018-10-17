@@ -92,28 +92,65 @@ public class ServiceSortingImpl implements ServiceSorting {
       然后逐渐将增量减小,并重复上述过程。直至增量为1,此时数据序列基本有序,最后进行插入排序。*/
     @Override
     public void shellsort(int[] array) throws Exception {
-       int temp = 0;
-       int length = array.length;
-       int incre = length;
+        int temp = 0;
+        int length = array.length;
+        int incre = length;
 
-       while (true){
-           incre = incre/2;     //分成了多少组
-           for (int k = 0; k < incre; k++) {    //循环排序多少组
-               for (int i = k; i < length - incre; i += incre) {  //插排
-                   for (int j = i  + incre ; j > k; j -= incre) {
-                       if(array[j] < array[j - incre]){
-                           temp = array[j - incre];
-                           array[j - incre] = array[j];
-                           array[j] = temp;
-                       }else {
-                           break;
-                       }
-                   }
-               }
-           }
-           if(incre == 1){
-               break;
-           }
-       }
+        while (true) {
+            incre = incre / 2;     //分成了多少组
+            for (int k = 0; k < incre; k++) {    //循环排序多少组
+                for (int i = k; i < length - incre; i += incre) {  //插排
+                    for (int j = i + incre; j > k; j -= incre) {
+                        if (array[j] < array[j - incre]) {
+                            temp = array[j - incre];
+                            array[j - incre] = array[j];
+                            array[j] = temp;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+            if (incre == 1) {
+                break;
+            }
+        }
+    }
+
+    /*    基本思想：（分治）
+        先从数列中取出一个数作为key值；
+        将比这个数小的数全部放在它的左边，大于或等于它的数全部放在它的右边；
+        对左右两个小数列重复第二步，直至各区间只有1个数。*/
+    @Override
+    public void quicksort(int a[], int low, int high) throws Exception {
+        int start = low;
+        int end = high;
+        int key = a[low];
+
+        while (end > start) {
+            //从后往前比较
+            while (end > start && a[end] >= key) {//如果没有比关键值小的，比较下一个，直到有比关键值小的交换位置，然后又从前往后比较
+                end--;
+            }
+            if(a[end] <= key){
+                int temp = a[end];
+                a[end] = a[start];
+                a[start] = temp;
+            }
+
+            //从前往后比较
+            while(end > start && a[start] <= key) {//如果没有比关键值大的，比较下一个，直到有比关键值大的交换位置
+                start++;
+            }
+            if(a[start] >= key){
+                int temp = a[start];
+                a[start] = a[end];
+                a[end] = temp;
+            }
+            //此时第一次循环比较结束，关键值的位置已经确定了。左边的值都比关键值小，右边的值都比关键值大，但是两边的顺序还有可能是不一样的，进行下面的递归调用
+        }
+        //递归
+        if(start > low) quicksort(a,low,start-1);//左边序列。第一个索引位置到关键值索引-1
+        if(end < high) quicksort(a,end+1,high);//右边序列。从关键值索引+1到最后一个
     }
 }

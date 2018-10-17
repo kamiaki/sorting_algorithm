@@ -12,4 +12,5 @@ public interface ServiceSorting {
     void selectsort(int[] array)throws Exception;
     void insertionsort(int[] array)throws Exception;
     void shellsort(int[] array)throws Exception;
+    void quicksort(int a[],int low,int high)throws Exception;
 }
