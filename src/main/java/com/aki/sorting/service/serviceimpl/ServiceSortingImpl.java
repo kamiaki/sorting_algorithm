@@ -153,4 +153,133 @@ public class ServiceSortingImpl implements ServiceSorting {
         if(start > low) quicksort(a,low,start-1);//左边序列。第一个索引位置到关键值索引-1
         if(end < high) quicksort(a,end+1,high);//右边序列。从关键值索引+1到最后一个
     }
+
+/*    归并排序是建立在归并操作上的一种有效的排序算法。该算法是采用分治法的一个非常典型的应用。
+    首先考虑下如何将2个有序数列合并。这个非常简单，只要从比较2个数列的第一个数，谁小就先取谁，
+    取了后就在对应数列中删除这个数。然后再进行比较，如果有数列为空，那直接将另一个数列的数据依次取出即可。*/
+    @Override
+    //合并 ：将两个序列a[first-middle],a[middle+1-end]合并
+    public void mergeArray(int[] a, int first, int middle, int end, int[] temp) throws Exception {
+        int i = first;
+        int m = middle;
+        int j = middle + 1;
+        int n = end;
+        int k = 0;
+        while (i <= m && j <= n){
+            if (a[i] < a[j]){
+                temp[k] = a[i];
+                k++;
+                i++;
+            }else{
+                temp[k] = a[j];
+                k++;
+                j++;
+            }
+        }
+
+        //其中有一边取完了
+        while (i <= m){
+            temp[k] = a[i];
+            k++;
+            i++;
+        }
+        while (j <= n){
+            temp[k] = a[j];
+            k++;
+            j++;
+        }
+
+        for (int l = 0; l < k; l++) {
+            a[first + l] = temp[l];
+        }
+    }
+
+    @Override
+    public void merge_sort(int[] a, int first, int last, int[] temp) throws Exception {
+        if(first < last){
+            int middle = (first + last) / 2;
+            merge_sort(a, first, middle, temp);             //左半部分排好序
+            merge_sort(a, middle + 1, last, temp);      //右半部分排好序
+            mergeArray(a,first,middle,last,temp);           //合并左右部分
+        }
+    }
+
+    @Override
+    //n节点总数
+    public void MinHeapFixdown(int[] a, int i, int n) throws Exception {
+        int j = 2*i+1;
+        int temp = 0;
+
+        while (j<n){
+            //在左右节点中号最小的
+            if(j+1<n && a[j+1]<a[j]){
+                j++;
+            }
+            if(a[i] <= a[j])
+                break;
+            //较大节点下移
+            temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
+
+            i = j;
+            j = 2*i+1;
+        }
+    }
+
+    @Override
+    public void MakeMinHeap(int[] a, int n) throws Exception {
+        for(int i=(n-1)/2 ; i>=0 ; i--){
+            MinHeapFixdown(a,i,n);
+        }
+    }
+
+    @Override
+    public void MinHeap_Sort(int[] a, int n) throws Exception {
+        int temp = 0;
+        MakeMinHeap(a,n);
+
+        for(int i=n-1;i>0;i--){
+            temp = a[0];
+            a[0] = a[i];
+            a[i] = temp;
+            MinHeapFixdown(a,0,i);
+        }
+    }
+
+/*    （1）首先确定基数为10，数组的长度也就是10.每个数34都会在这10个数中寻找自己的位置。
+            （2）不同于BinSort会直接将数34放在数组的下标34处，基数排序是将34分开为3和4，
+    第一轮排序根据最末位放在数组的下标4处，第二轮排序根据倒数第二位放在数组的下标3处，然后遍历数组即可。*/
+    @Override
+    public void RadixSort(int[] A, int[] temp, int n, int k, int r, int[] cnt) throws Exception {
+        //A:原数组
+        //temp:临时数组
+        //n:序列的数字个数
+        //k:最大的位数2
+        //r:基数10
+        //cnt:存储bin[i]的个数
+
+        for(int i=0 , rtok=1; i<k ; i++ ,rtok = rtok*r){
+
+            //初始化
+            for(int j=0;j<r;j++){
+                cnt[j] = 0;
+            }
+            //计算每个箱子的数字个数
+            for(int j=0;j<n;j++){
+                cnt[(A[j]/rtok)%r]++;
+            }
+            //cnt[j]的个数修改为前j个箱子一共有几个数字
+            for(int j=1;j<r;j++){
+                cnt[j] = cnt[j-1] + cnt[j];
+            }
+            for(int j = n-1;j>=0;j--){      //重点理解
+                cnt[(A[j]/rtok)%r]--;
+                temp[cnt[(A[j]/rtok)%r]] = A[j];
+            }
+            for(int j=0;j<n;j++){
+                A[j] = temp[j];
+            }
+        }
+    }
 }
