@@ -3,6 +3,7 @@ package com.aki.sorting.service.serviceimpl;
 import com.aki.sorting.service.ServiceSorting;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -123,35 +124,32 @@ public class ServiceSortingImpl implements ServiceSorting {
         对左右两个小数列重复第二步，直至各区间只有1个数。*/
     @Override
     public void quicksort(int a[], int low, int high) throws Exception {
-        int start = low;
-        int end = high;
-        int key = a[low];
+        if(low >= high)return;
+        int s = low;
+        int e = high;
+        int key = a[s];
 
-        while (end > start) {
-            //从后往前比较
-            while (end > start && a[end] >= key) {//如果没有比关键值小的，比较下一个，直到有比关键值小的交换位置，然后又从前往后比较
-                end--;
+        while (s < e){
+            while (s < e && key <= a[e]){
+                e--;
             }
-            if(a[end] <= key){
-                int temp = a[end];
-                a[end] = a[start];
-                a[start] = temp;
+            if(s < e){
+                a[s] = a[e];
+                s++;
             }
-
-            //从前往后比较
-            while(end > start && a[start] <= key) {//如果没有比关键值大的，比较下一个，直到有比关键值大的交换位置
-                start++;
+            while (s < e && a[s] < key){
+                s++;
             }
-            if(a[start] >= key){
-                int temp = a[start];
-                a[start] = a[end];
-                a[end] = temp;
+            if(s < e){
+                a[e] = a[s];
+                e--;
             }
-            //此时第一次循环比较结束，关键值的位置已经确定了。左边的值都比关键值小，右边的值都比关键值大，但是两边的顺序还有可能是不一样的，进行下面的递归调用
+            a[s] = key;
+            System.out.println(Arrays.toString(a));
         }
-        //递归
-        if(start > low) quicksort(a,low,start-1);//左边序列。第一个索引位置到关键值索引-1
-        if(end < high) quicksort(a,end+1,high);//右边序列。从关键值索引+1到最后一个
+
+        quicksort(a, low, s-1);
+        quicksort(a, s+1, high);
     }
 
 /*    归并排序是建立在归并操作上的一种有效的排序算法。该算法是采用分治法的一个非常典型的应用。
