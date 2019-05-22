@@ -20,6 +20,10 @@
     }
     sortingWS.onmessage = function (ev) {
         console.info('收到消息:' + ev.data)
+        var newNode = document.createElement("div");
+        newNode.innerHTML = ev.data;
+        document.getElementById('reMsg').insertBefore(newNode,null);
+
     }
     sortingWS.onerror = function (ev) {
         console.info('发生异常')

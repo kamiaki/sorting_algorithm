@@ -27,7 +27,7 @@ public class sortingWebSocket {
     @OnMessage
     public void onMessage(String msg){
         System.out.println(new StringBuffer().append("收到客户端消息:").append(msg) );
-        sendMsg(new StringBuffer().append("你发的消息是:").append(msg).toString());
+        sendMsg(new StringBuffer().append("客户端告诉你,你发的消息是:").append(msg).toString());
     }
 
     @OnError
