@@ -18,17 +18,8 @@ public class ControllerSorting {
     ServiceSorting serviceSorting;
 
     @RequestMapping(value = "index")
-    public String index(Model model){
-        model.addAttribute("value1","value123");
+    public String index(){
         return "index";
     }
 
-    @ResponseBody
-    @RequestMapping(value="bubblesort")
-    public String bubblesort()throws Exception{
-        int[] ints = {34,2,13,44,345};
-        serviceSorting.bubblesort(ints);
-        System.out.println(ints);
-        return "pass";
-    }
 }

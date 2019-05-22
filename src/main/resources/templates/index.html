@@ -4,9 +4,54 @@
     <meta charset="UTF-8">
     <title>sorting_algorithm</title>
 </head>
+<script>
+    window.onbeforeunload = function(){
+        closeWs();
+    }
+    var sortingWS;
+    sortingWS = new WebSocket("ws://localhost:8080/sortingWS");
+
+    sortingWS.onopen = function (ev) {
+        console.info('建立了连接')
+        sortingWS.send("此消息来自客户端")
+    }
+    sortingWS.onclose = function (ev) {
+        console.info('关闭了连接')
+    }
+    sortingWS.onmessage = function (ev) {
+        console.info('收到消息:' + ev.data)
+    }
+    sortingWS.onerror = function (ev) {
+        console.info('发生异常')
+    }
+    //发送消息
+    var sendMsg = function () {
+        var text = document.getElementById('sendMsg').value;
+        sortingWS.send(text);
+    }
+    //关闭
+    var closeWs = function () {
+        sortingWS.close();
+    }
+
+</script>
 <body>
-    <h1>sorting_algorithm</h1>
-    <p th:text="${value1}">1111111XXX</p>
-    <a href="/bubblesort">bubblesort</a>
+    <div style="background-color: #f7ffb8">
+        <table>
+            <tr>
+                <td>发送内容:</td>
+                <td>
+                    <input type="text" id="sendMsg">
+                </td>
+                <td>
+                    <a href="javascript:void (0)" onclick="sendMsg()">发送</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="reMsg" style="background-color: grey">
+    </div>
+
+
 </body>
 </html>
