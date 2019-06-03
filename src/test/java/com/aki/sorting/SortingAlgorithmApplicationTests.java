@@ -54,9 +54,9 @@ public class SortingAlgorithmApplicationTests {
 //        //希尔
 //        serviceSorting.shellsort(ints);
 //        System.out.println(gson.toJson(ints));
-        //快速
-        serviceSorting.quicksort(ints,0,ints.length - 1);
-        System.out.println(gson.toJson(ints));
+//        //快速
+//        serviceSorting.quicksort(ints,0,ints.length - 1);
+//        System.out.println(gson.toJson(ints));
 //		//归并
 //		int[] temp = new int[ints.length];
 //		serviceSorting.merge_sort(ints,0,ints.length-1,temp);
