@@ -33,8 +33,8 @@ public class ServiceSortingImpl implements ServiceSorting {
                     ints[j - 1] = temp;
                     flag = true;
                 }
-                if (!flag) break;
             }
+            if (!flag) break;
         }
     }
 

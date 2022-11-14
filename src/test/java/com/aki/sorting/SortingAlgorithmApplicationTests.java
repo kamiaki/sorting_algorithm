@@ -54,9 +54,9 @@ public class SortingAlgorithmApplicationTests {
 //        //希尔
 //        serviceSorting.shellsort(ints);
 //        System.out.println(gson.toJson(ints));
-//        //快速
-//        serviceSorting.quicksort(ints,0,ints.length - 1);
-//        System.out.println(gson.toJson(ints));
+        //快速
+        serviceSorting.quicksort(ints,0,ints.length - 1);
+        System.out.println(gson.toJson(ints));
 //		//归并
 //		int[] temp = new int[ints.length];
 //		serviceSorting.merge_sort(ints,0,ints.length-1,temp);
@@ -65,10 +65,10 @@ public class SortingAlgorithmApplicationTests {
 //		serviceSorting.MinHeap_Sort(ints,ints.length);
 //		System.out.println(gson.toJson(ints));
 		//基排序
-		int[] temp1 = new int[100];
-		int[] temp = new int[ints.length];
-		serviceSorting.RadixSort(ints,temp1,ints.length,3,10,temp);
-		System.out.println(gson.toJson(ints));
+//		int[] temp1 = new int[100];
+//		int[] temp = new int[ints.length];
+//		serviceSorting.RadixSort(ints,temp1,ints.length,3,10,temp);
+//		System.out.println(gson.toJson(ints));
 	}
 
 }
